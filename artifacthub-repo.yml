@@ -1,0 +1,6 @@
+# Artifact Hub metadata for the OCI repository ghcr.io/think-cube/charts/rabbitmq-stomp.
+# https://artifacthub.io/docs/topics/repositories/helm-charts/
+repositoryID: 34a4137e-cdaf-44d7-9bd1-bf72015abf9b
+owners:
+  - name: think-cube
+    email: contact@thinkcube.dev

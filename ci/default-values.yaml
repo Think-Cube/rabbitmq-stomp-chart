@@ -1,0 +1,4 @@
+# The default setup: credentials in a chart-managed Secret and a persistent volume.
+auth:
+  username: ci-admin
+  password: ci-admin-password

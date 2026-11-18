@@ -1,0 +1,131 @@
+# -- Override the chart name used in resource names
+nameOverride: ""
+# -- Override the full resource name prefix
+fullnameOverride: ""
+
+image:
+  # -- Image repository
+  repository: ghcr.io/think-cube/rabbitmq-stomp
+  # -- Image tag
+  tag: "2.0.0"
+  # -- Image digest, for example `sha256:...`. When set, it is used instead of the tag.
+  digest: ""
+  # -- Image pull policy
+  pullPolicy: IfNotPresent
+
+# -- Secrets for pulling images from private registries
+imagePullSecrets: []
+
+auth:
+  # -- Existing Secret with the keys `username` and `password`. When empty, the chart creates one from the values below.
+  existingSecret: ""
+  # -- Admin user created on first start. Required when no existing Secret is set.
+  username: ""
+  # -- Password of the admin user. Required when no existing Secret is set.
+  password: ""
+
+rabbitmq:
+  # -- Memory use at which RabbitMQ blocks publishers. Keep it at about 75% of `resources.limits.memory`, in Kubernetes units such as `768Mi`.
+  memoryHighWatermark: 768Mi
+  # -- Free disk space below which RabbitMQ blocks publishers
+  diskFreeLimit: 1Gi
+  # -- Extra `rabbitmq.conf` settings, loaded after the image and chart defaults
+  extraConfig: ""
+  # -- Extra environment variables for the RabbitMQ container
+  extraEnv: []
+
+# -- Resources of the RabbitMQ container
+resources:
+  requests:
+    cpu: 250m
+    memory: 1Gi
+  limits:
+    memory: 1Gi
+
+service:
+  # -- Service type
+  type: ClusterIP
+  # -- Service annotations
+  annotations: {}
+  ports:
+    # -- AMQP port
+    amqp: 5672
+    # -- Management UI and HTTP API port
+    management: 15672
+    # -- STOMP port
+    stomp: 61613
+    # -- STOMP over WebSockets port
+    webStomp: 15674
+    # -- Prometheus metrics port
+    metrics: 15692
+
+ingress:
+  # -- Create an Ingress for the management UI
+  enabled: false
+  # -- Ingress class, for example `nginx`
+  className: ""
+  # -- Ingress annotations
+  annotations: {}
+  # -- Host of the management UI
+  host: rabbitmq.example.com
+  # -- TLS settings, for example `[{secretName: rabbitmq-tls, hosts: [rabbitmq.example.com]}]`
+  tls: []
+
+persistence:
+  # -- Store messages and definitions in a PersistentVolumeClaim. When disabled, everything is lost with the pod.
+  enabled: true
+  # -- Storage class. Empty uses the cluster default; `-` disables dynamic provisioning.
+  storageClass: ""
+  # -- Access modes of the claim
+  accessModes:
+    - ReadWriteOnce
+  # -- Size of the claim
+  size: 8Gi
+  # -- Keep the claim, and the data in it, when the release is uninstalled
+  keepOnUninstall: true
+
+serviceAccount:
+  # -- Create a ServiceAccount
+  create: true
+  # -- Name of the ServiceAccount. Generated from the release name when empty.
+  name: ""
+  # -- Annotations of the ServiceAccount
+  annotations: {}
+
+# -- Annotations added to the pod
+podAnnotations: {}
+# -- Labels added to the pod
+podLabels: {}
+
+# -- Pod security context. The image runs RabbitMQ as UID 100, GID 101.
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 100
+  runAsGroup: 101
+  fsGroup: 101
+  seccompProfile:
+    type: RuntimeDefault
+
+# -- Container security context
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+
+# -- Seconds RabbitMQ gets to shut down cleanly
+terminationGracePeriodSeconds: 60
+
+# -- Node selector for the pod
+nodeSelector: {}
+# -- Tolerations for the pod
+tolerations: []
+# -- Affinity for the pod
+affinity: {}
+
+test:
+  image:
+    # -- Image used by `helm test`
+    repository: curlimages/curl
+    # -- Image tag, pinned by digest
+    tag: "8.23.0@sha256:3fb7e13e5d179a845c97d78204f3f1064d1907037f26a3ebf91710571151fd93"

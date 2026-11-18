@@ -1,0 +1,29 @@
+apiVersion: v2
+name: rabbitmq-stomp
+description: Single-node RabbitMQ with the management, STOMP and Web STOMP plugins, using the Think-Cube rabbitmq-stomp image
+type: application
+version: 1.0.0
+appVersion: "4.4.1"
+kubeVersion: ">=1.28.0-0"
+home: https://github.com/Think-Cube/rabbitmq-stomp-chart
+icon: https://avatars.githubusercontent.com/u/96669?s=200&v=4
+sources:
+  - https://github.com/Think-Cube/rabbitmq-stomp-chart
+  - https://github.com/Think-Cube/docker-rabbitmq-stomp
+keywords:
+  - rabbitmq
+  - stomp
+  - websocket
+  - messaging
+  - amqp
+maintainers:
+  - name: Think-Cube
+    email: contact@thinkcube.dev
+    url: https://github.com/Think-Cube
+annotations:
+  artifacthub.io/license: MIT
+  artifacthub.io/images: |
+    - name: rabbitmq-stomp
+      image: ghcr.io/think-cube/rabbitmq-stomp:2.0.0
+    - name: curl
+      image: curlimages/curl:8.23.0

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "rabbitmq.fullname" . }}
+  labels:
+    {{- include "rabbitmq.labels" . | nindent 4 }}
+data:
+  # Containers rarely let RabbitMQ see their memory limit, so the thresholds are absolute.
+  40-chart.conf: |
+    vm_memory_high_watermark.absolute = {{ .Values.rabbitmq.memoryHighWatermark }}
+    disk_free_limit.absolute = {{ .Values.rabbitmq.diskFreeLimit }}
+  {{- with .Values.rabbitmq.extraConfig }}
+  90-extra.conf: |
+    {{- . | nindent 4 }}
+  {{- end }}
