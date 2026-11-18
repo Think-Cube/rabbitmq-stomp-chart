@@ -1,0 +1,18 @@
+# Management ingress with TLS, extra config, a pinned digest and no persistence.
+image:
+  digest: sha256:83571dac707853ff59daf8662e0c3f0d5070317e23d9b076997c5e360fd2457a
+auth:
+  username: ci-admin
+  password: ci-admin-password
+rabbitmq:
+  extraConfig: |
+    log.console.level = info
+ingress:
+  enabled: true
+  className: nginx
+  tls:
+    - secretName: rabbitmq-tls
+      hosts:
+        - rabbitmq.example.com
+persistence:
+  enabled: false

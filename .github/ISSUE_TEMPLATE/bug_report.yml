@@ -1,0 +1,57 @@
+name: Bug Report
+description: Report a problem with the Helm chart
+title: "bug: "
+labels: ["bug", "triage"]
+body:
+  - type: input
+    id: chart_version
+    attributes:
+      label: Chart version
+      placeholder: e.g. 1.0.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear description of what the bug is.
+    validations:
+      required: true
+
+  - type: textarea
+    id: values
+    attributes:
+      label: Values
+      description: The values you install with, without passwords or other secrets.
+      render: yaml
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. helm install ...
+        2. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: |
+        - Helm version: 4.3
+        - Kubernetes version and distribution: 1.35, AKS
+        - Storage class: managed-csi
+    validations:
+      required: true

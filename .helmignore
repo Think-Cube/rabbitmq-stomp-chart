@@ -1,0 +1,14 @@
+.git/
+.github/
+.gitattributes
+.gitignore
+ci/
+artifacthub-repo.yml
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+*.swp
+*.tmp
+*~
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: rabbitmq-stomp image issues
+    url: https://github.com/Think-Cube/docker-rabbitmq-stomp/issues
+    about: Problems in the container image rather than in this chart
+  - name: RabbitMQ discussions
+    url: https://github.com/rabbitmq/rabbitmq-server/discussions
+    about: Questions about RabbitMQ itself
