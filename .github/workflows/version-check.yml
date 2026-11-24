@@ -1,0 +1,15 @@
+name: Version check
+
+on:
+  schedule:
+    - cron: "23 5 * * 1"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  check:
+    permissions:
+      contents: read
+      issues: write
+    uses: Think-Cube/workflows/.github/workflows/version-check.yml@v1.3.0

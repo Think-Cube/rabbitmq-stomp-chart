@@ -1,0 +1,16 @@
+# Versions Dependabot does not track; checked weekly by .github/workflows/version-check.yml.
+checks:
+  - name: rabbitmq-stomp image
+    file: values.yaml
+    path: .image.tag
+    source: github-release
+    repository: Think-Cube/docker-rabbitmq-stomp
+    note: Also update appVersion to the image's RabbitMQ version and the artifacthub.io/images annotation in Chart.yaml, and bump the chart version.
+  - name: curl used by helm test
+    file: values.yaml
+    path: .test.image.tag
+    pattern: '^([^@]+)'
+    source: docker-hub
+    repository: curlimages/curl
+    tag-pattern: '(\d+\.\d+\.\d+)'
+    note: Update the tag together with its digest, and the artifacthub.io/images annotation in Chart.yaml.
